@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/_build": true,
+        "_build": true,
+        "**/.vscode": false
+    },
+    "explorerExclude.backup": null,
+    "editor.tabSize": 2
+}
