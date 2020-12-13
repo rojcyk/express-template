@@ -2,7 +2,6 @@ import Express from 'express'
 import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import cors from 'cors'
-import passport from 'passport'
 
 /*****************************
  * Local imports
@@ -11,6 +10,9 @@ import passport from 'passport'
 import ping from '@routes/ping'
 import notFound from '@routes/404'
 import handleError from '@routes/error'
+import signIn from '@routes/session/signIn'
+import signUp from '@routes/session/signUp'
+import userRouter from '@routes/users'
 
 /*****************************
  * EXPRESS
@@ -32,19 +34,22 @@ app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 /*****************************
  * ROUTER
  *****************************/
 
- // Are we up yet?
-app.use('/ping', ping)
-
 app.get('/', (_req, res, _next) => {
   res.send({ message: 'Maybe sometimes.' })
 })
+
+// Are we up yet?
+app.use('/ping', ping)
+
+app.post('/signin', signIn)
+app.post('/signup', signUp)
+
+app.use('/users', userRouter)
+
 
 /*****************************
  * ERROR HANDLER

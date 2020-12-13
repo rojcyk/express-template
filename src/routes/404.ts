@@ -9,7 +9,7 @@ import Express from 'express'
  *****************************/
 
 import { NOT_FOUND } from '@constants/statusCodes'
-import ResponseError from '../error'
+import ResponseError from '@utils/error'
 
 /*****************************
  * Route
@@ -21,7 +21,7 @@ export const NotFound = (
   next: Express.NextFunction
 ) => {
   try {
-    throw new ResponseError(NOT_FOUND, 'The requested resource is not available')
+    throw new ResponseError(NOT_FOUND, 'The requested route is not available')
   } catch (err) {
     next(err)
   }

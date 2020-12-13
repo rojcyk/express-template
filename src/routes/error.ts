@@ -8,7 +8,8 @@ import Express from 'express'
  * Local imports
  *****************************/
 
- import ResponseError from '../error'
+ import ResponseError from '@utils/error'
+ import { INTERNAL_SERVER_ERROR } from '@constants/statusCodes'
 
 /*******************************************************
  * 
@@ -34,7 +35,11 @@ export const handleError = (
       ...body
     })
   } else {
-    res.status(500).json({
+    if (process.env.NODE_ENV === 'development') {
+      console.log(err.message)
+    }
+
+    res.status(INTERNAL_SERVER_ERROR).json({
       status: 'error',
       code: 500,
       message: 'Unexpected error, sorry.'
