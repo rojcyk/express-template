@@ -2,7 +2,7 @@
  * Global imports
  ********************************/
 
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
 
 /********************************
  * Interfaces
@@ -59,6 +59,17 @@ export class User {
   })
   isSubscribed!: boolean
 
+  /**
+   * DB insert time.
+   */
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  createdAt!: Date;
+
+  /**
+   * DB last update time.
+   */
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  updatedAt!: Date;
 
   /********************************
    * Custom getters and setters
